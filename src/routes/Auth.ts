@@ -1,5 +1,5 @@
 import express from 'express';
-import { singIn, singUp } from '../controllers/auth.js';
+import { singIn, singUp } from '../controllers/auth';
 
 const router=express.Router();
 
