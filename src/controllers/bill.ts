@@ -3,6 +3,7 @@ import { Request,Response } from "express";
 import { Bill,customRequest } from "../type";
 
 
+
 export const getAllBills = async (req:Request, res:Response) => {
   try {
     const allBills = await db.bills.findMany();
@@ -36,7 +37,7 @@ export const addBill = async (req:customRequest, res:Response) => {
     if (product.quantity == 0)
       return res.json("We are sorry, This product is out of stock");
     if (numberofproduct > product.quantity)
-      return res.json(`We have only ${product.quantity} left in our stock`);
+      return res.json(`We have only ${product.quantity} product left in our stock`);
 
     const Bill:Bill = {
       productName: product.name,
@@ -48,18 +49,18 @@ export const addBill = async (req:customRequest, res:Response) => {
     };
 
     product.quantity = product.quantity - numberofproduct;
-    await db.inventory.update({
+    const updateInventory= db.inventory.update({
       where: { productId: product.productId },
       data: {
         quantity: product.quantity,
         totalValue: product.quantity * product.price,
       },
     });
-
-    const newBill = await db.bills.create({ data: Bill });
+    const createBill = db.bills.create({ data: Bill });
+    const transactionData=await db.$transaction([updateInventory, createBill]);
     return res
       .status(200)
-      .json({ success: true, message: "Bill created successfully", newBill });
+      .json({ success: true, message: "Bill created successfully", newBill:transactionData });
   } catch (err:any) {
     return res.status(500).json({ success: false, message: err.message });
   }
