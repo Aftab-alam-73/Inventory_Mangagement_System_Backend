@@ -47,5 +47,4 @@ model Bills {
   productId        Int
   createdAt        DateTime  @default(now())
   customerId        Int
- 
 }

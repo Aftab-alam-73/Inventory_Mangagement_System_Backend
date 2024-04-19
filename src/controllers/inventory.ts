@@ -17,7 +17,7 @@ export const getSingleProduct = async (req:Request, res:Response) => {
       where: { productId: Number(id) },
     });
     return res.status(200).json(product);
-  } catch (err) {
+  } catch (err:any) {
     return res.status(500).json({ success: false, message: err });
   }
 };
