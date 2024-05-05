@@ -7,7 +7,7 @@ export const verifyToken=(req:customRequest,res:Response,next:NextFunction)=>{
     const token:string=req.cookies.access_token;
    
     if(!token){
-     return res.status(401).json({success:false ,message:"You don't have access token please login."});
+     return res.status(401).json({success:false ,message:"You don't have access token please login first."});
     }
     try{
        const result=jwt.verify(token,"ljfsksdflj") as User;
