@@ -1,4 +1,4 @@
-import { User } from './type';
+import { User } from '../type';
 import jwt from 'jsonwebtoken';
 
 // This function genrates a token.

@@ -1,7 +1,7 @@
 import express, { Response } from "express";
-import authRoutes from "./routes/Auth";
-import inventoryRoutes from "./routes/Inventory";
-import billRoutes from "./routes/Bill";
+import authRoutes from "./routes/auth.route";
+import inventoryRoutes from "./routes/Inventory.route";
+import billRoutes from "./routes/bill.route";
 import cookieParser from "cookie-parser";
 
 const app = express();

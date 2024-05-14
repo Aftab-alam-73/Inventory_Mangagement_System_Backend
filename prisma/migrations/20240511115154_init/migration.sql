@@ -34,6 +34,7 @@ CREATE TABLE "Bills" (
     "totalAmount" INTEGER NOT NULL,
     "productId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "customerId" INTEGER NOT NULL,
 
     CONSTRAINT "Bills_pkey" PRIMARY KEY ("billId")
 );
@@ -43,6 +44,3 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- AddForeignKey
 ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Bills" ADD CONSTRAINT "Bills_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Inventory"("productId") ON DELETE CASCADE ON UPDATE CASCADE;
